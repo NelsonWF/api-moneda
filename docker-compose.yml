@@ -1,0 +1,53 @@
+version: '3.9'
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: db.Dockerfile
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - moneda-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    labels:
+      - traefik.enabled=false
+    restart: 'on-failure'
+  app:
+    build:
+      context: .
+      args:
+        JAR_FILE: build/libs/*.jar
+    restart: 'on-failure'
+    deploy:
+      mode: replicated
+      replicas: 2
+    environment:
+      SERVER_PORT: 4300
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/api
+      API_fixer-key: 4d6c3cd66f9bb51e77ef79197656f20d
+    labels:
+      - traefik.http.routers.app.rule=Host(`moneda.docker.localhost`)
+      - traefik.http.middlewares.app-ratelimit.ratelimit.average=100
+      - traefik.http.middlewares.app-ratelimit.ratelimit.burst=50
+      - traefik.http.middlewares.app-compress.compress=true
+      - traefik.http.middlewares.app-inflightreq.inflightreq.amount=10
+    depends_on:
+      - db
+  proxy:
+    image: traefik:v2.0
+    depends_on:
+      - app
+    restart: 'on-failure'
+    ports:
+      - '80:80'
+      - '8080:8080'
+    volumes:
+      - ./traefik.yml:/etc/traefik/traefik.yml
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - traefik.enabled=false
+volumes:
+  moneda-data:

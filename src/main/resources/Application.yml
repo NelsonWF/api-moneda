@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/api
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  mandatory-file-encoding: UTF-8
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+server:
+  servlet:
+    context-path: /api
+
+api:
+  fixer-key: 1
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+    guru:
+      springframework:
+        controllers: DEBUG

@@ -1,0 +1,38 @@
+package com.api.nawf.application.usecases;
+
+import java.util.Date;
+
+import javax.transaction.Transactional;
+
+import com.api.nawf.domain.entities.BlacklistEntity;
+import com.api.nawf.domain.services.BlackListService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+@Transactional
+public class BlackListCases {
+    @Autowired
+    private BlackListService blackListService;
+
+    /**
+     * Agrega a una IP a la lista negra
+     * 
+     * @param ip
+     * @return
+     */
+    public BlacklistEntity createBlackList(String ip) {
+        BlacklistEntity blackList = BlacklistEntity.builder().ip(ip).date(new Date()).build();
+        return this.blackListService.save(blackList);
+    }
+
+    /**
+     * Elimina una IP de la lista negra
+     * 
+     * @param ip
+     */
+    public void deleteBlackList(String ip) {
+        this.blackListService.delete(ip);
+    }
+}

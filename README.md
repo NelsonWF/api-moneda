@@ -38,9 +38,9 @@ Para montar la aplicación en docker se ejecuta lo siguiente:
     docker-compose up -d --build
 ```
 
-para consumir la aplicación se debe usar el dominio moneda.docker.localhost,
+para consumir la aplicación se debe usar el dominio moneda.docker.localhost.
 
-- Endpoints expuestos: http://moneda.docker.localhost/api/swagger-ui
+- Endpoints expuestos: http://moneda.docker.localhost/api/swagger-ui.html
 
 ## 3. Ejecución de pruebas unitarias
 

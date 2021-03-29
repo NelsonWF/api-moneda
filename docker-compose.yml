@@ -34,6 +34,10 @@ services:
       - traefik.http.middlewares.app-ratelimit.ratelimit.burst=50
       - traefik.http.middlewares.app-compress.compress=true
       - traefik.http.middlewares.app-inflightreq.inflightreq.amount=10
+      - traefik.http.middlewares.latency-check.circuitbreaker.expression=LatencyAtQuantileMS(50.0) > 100
+      - traefik.http.services.app-health.loadBalancer.healthCheck.path=/api/actuator/health
+      - traefik.http.services.app-health.loadBalancer.healthCheck.interval=10s
+      - traefik.http.services.app-health.loadBalancer.healthCheck.timeout=3s
     depends_on:
       - db
   proxy:

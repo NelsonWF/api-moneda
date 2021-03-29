@@ -16,4 +16,13 @@ public class CalendarHelper {
 	public Date toDate(long timestamp) {
 		return new Timestamp(timestamp * 1000L);
 	}
+
+	/**
+	 * Devuelve la hora actual del sistema.
+	 * 
+	 * @return fecha actual
+	 */
+	public Date now() {
+		return new Date();
+	}
 }

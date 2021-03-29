@@ -23,4 +23,9 @@ class CalendarHelperTest {
         Long time = 1616821200L;
         assertEquals(dateExpect, this.calendarHelper.toDate(time));
     }
+
+    @Test
+    void debeRetornarLaFechaActual() {
+        assertEquals(new Date(), this.calendarHelper.now());
+    }
 }

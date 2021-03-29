@@ -23,6 +23,8 @@ class BlackListServiceTest {
     @InjectMocks
     private BlackListService blackListService = new BlackListService();
 
+    private String ip = "192.168.1.1";
+
     @BeforeEach
     public void antesDe() {
         MockitoAnnotations.openMocks(this);
@@ -37,15 +39,19 @@ class BlackListServiceTest {
 
     @Test
     void debeLLamarAlMetodoDeleteDeBlackListPort() {
-        String ip = "192.168.1.1";
         blackListService.delete(ip);
         verify(blackListPort, times(1)).delete(ip);
     }
 
     @Test
     void debeLLamarAlMetodoIsIpBannedDeBlackListPort() {
-        String ip = "192.168.1.1";
         blackListService.isIpBanned(ip);
         verify(blackListPort, times(1)).isIpBanned(ip);
+    }
+
+    @Test
+    void debeLLamarAlMetodoFindOneDeBlackListPort() {
+        blackListService.findOne(ip);
+        verify(blackListPort, times(1)).findOne(ip);
     }
 }

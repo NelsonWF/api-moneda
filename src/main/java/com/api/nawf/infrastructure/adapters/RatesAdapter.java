@@ -1,16 +1,16 @@
 package com.api.nawf.infrastructure.adapters;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import com.api.nawf.domain.entities.CountryEntity;
 import com.api.nawf.domain.entities.RateEntity;
 import com.api.nawf.domain.ports.RatesPort;
 import com.api.nawf.infrastructure.adapters.repositories.RateJpaRepository;
+import com.api.nawf.infrastructure.helpers.CalendarHelper;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class RatesAdapter implements RatesPort {
@@ -18,9 +18,12 @@ public class RatesAdapter implements RatesPort {
 	@Autowired
 	private RateJpaRepository repository;
 
+	@Autowired
+	private CalendarHelper calendarHelper;
+
 	@Override
 	public List<RateEntity> findCurrentRatesByCountry(CountryEntity country) {
-		return this.repository.findCurrentRatesByCountry(country, new Date());
+		return this.repository.findCurrentRatesByCountry(country, this.calendarHelper.now());
 	}
 
 	@Override

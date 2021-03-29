@@ -48,4 +48,10 @@ class BlackListAdapterTest {
         blackListAdapter.isIpBanned(ip);
         verify(repository, only()).existsById(ip);
     }
+
+    @Test
+    void debeLlamarAlMetodoFindByIdDelJpaRepositorio() {
+        blackListAdapter.findOne(ip);
+        verify(repository, only()).findById(ip);
+    }
 }

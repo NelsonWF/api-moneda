@@ -13,9 +13,10 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 
-@SpringBootApplication(exclude = {ErrorMvcAutoConfiguration.class})
+@SpringBootApplication(exclude = { ErrorMvcAutoConfiguration.class })
 @ComponentScan("com.api.nawf")
 @EnableAutoConfiguration
 @EnableJpaRepositories("com.api.nawf")
@@ -36,6 +37,7 @@ public class StartApplication {
 		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
 		ObjectMapper objectMapper = jsonConverter.getObjectMapper();
 		objectMapper.registerModule(new Hibernate5Module());
+		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		return jsonConverter;
 	}
 }

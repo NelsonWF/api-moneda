@@ -40,9 +40,7 @@ Para montar la aplicación en docker se ejecuta lo siguiente:
 
 para consumir la aplicación se debe usar el dominio moneda.docker.localhost,
 
-- consulta cotizacion [GET] http://moneda.docker.localhost/api/v1/country/5.7.58.123
-- Banear IP [POST] http://moneda.docker.localhost/api/v1/blacklist/5.12.21.30
-- Eliminar IP [DELETE] http://moneda.docker.localhost/api/v1/blacklist/5.12.21.30
+- Endpoints expuestos: http://moneda.docker.localhost/api/swagger-ui
 
 ## 3. Ejecución de pruebas unitarias
 

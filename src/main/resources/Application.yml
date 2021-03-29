@@ -14,8 +14,12 @@ server:
   servlet:
     context-path: /api
 
+springdoc:
+  api-docs:
+    path: /api-docs
+
 api:
-  fixer-key: 1
+  fixer-key: 4d6c3cd66f9bb51e77ef79197656f20d
 
 logging:
   level:

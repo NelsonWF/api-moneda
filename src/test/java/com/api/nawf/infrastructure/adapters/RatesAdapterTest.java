@@ -1,6 +1,9 @@
 package com.api.nawf.infrastructure.adapters;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.only;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.util.Date;
@@ -44,6 +47,6 @@ class RatesAdapterTest {
     void debeLlamarAlMetodoFindCurrentRatesByCountryDelJpaRepositorio() {
         CountryEntity country = CountryEntityMother.getCountry();
         ratesAdapter.findCurrentRatesByCountry(country);
-        verify(repository, only()).findCurrentRatesByCountry(country, new Date());
+        verify(repository, times(1)).findCurrentRatesByCountry(eq(country), any(Date.class));
     }
 }

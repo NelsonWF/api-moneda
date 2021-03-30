@@ -4,7 +4,7 @@ Api de cotización de divisas.
 
 Aplicación realizada usando arquitectura limpia con spring boot y base de datos postgresql. Adicional a eso se configura un proxy reverse llamado traefik.
 
-**Nota:** Con el api-key del api fixer, solo se puede consultar no se puede consultar algunos paises.
+**Nota:** Con el api-key del api fixer, no se puede consultar todas las monedas de los paises a menos que el api-key sea de pago.
 
 ## pre-requisitos
 
